@@ -1,3 +1,5 @@
+// process.env.UV_THREADPOOL_SIZE = 1; //causes FS to resolve last
+
 const https = require('https');
 const crypto = require('crypto');
 const fs = require('fs');
@@ -8,7 +10,7 @@ const doRequest = () => {
   https.request('https://www.google.com', res => {
     res.on('data', () => {});
     res.on('end', () => {
-      console.log('http request done', Date.now() - start);
+      console.log('http request done:', Date.now() - start);
     });
   }).end();
 }
