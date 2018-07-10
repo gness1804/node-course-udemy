@@ -1,14 +1,18 @@
+process.env.UV_THREADPOOL_SIZE = 1;
 const cluster = require('cluster');
 const express = require('express');
+const crypto = require('crypto');
 const app = express();
 
 const runServer = () => {
   app.get('/', (req, res) => {
-    res.send('Hello!');
+    crypto.pbkdf2('a', 'b', 100000, 512, 'sha512', () => {
+      res.send('Crypto request done.');
+    })
   });
 
   app.get('/fast', (req, res) => {
-    res.send('This was fast!');
+    res.send('Fast http call is done.');
   });
 
   app.listen(3000, () => {
@@ -20,7 +24,8 @@ const runServer = () => {
 if (cluster.isMaster) {
   //will cause index.js to be executed again, but in child mode
   let counter = 1
-  while (counter <= 4) {
+  const clusterNum = 2;
+  while (counter <= clusterNum) {
     cluster.fork();
     counter++;
   }
