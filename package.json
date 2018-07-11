@@ -5,7 +5,9 @@
   "main": "index.js",
   "scripts": {
     "test": "echo 'No tests...'",
-    "start": "node index.js"
+    "dev": "node index.js",
+    "start": "pm2 start index2.js -i 0",
+    "end": "pm2 delete index2.js"
   },
   "keywords": [],
   "author": "",
