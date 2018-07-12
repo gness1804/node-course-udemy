@@ -7,12 +7,14 @@
     "test": "echo 'No tests...'",
     "dev": "node index.js",
     "start": "pm2 start index2.js -i 0",
+    "start:workers": "node index3.js",
     "end": "pm2 delete index2.js"
   },
   "keywords": [],
   "author": "",
   "license": "ISC",
   "dependencies": {
-    "express": "^4.16.3"
+    "express": "^4.16.3",
+    "webworker-threads": "^0.7.16"
   }
 }
